@@ -92,6 +92,16 @@ class Home extends Component {
 
                                                     </View>
                                                     <View style={{ height: 1, backgroundColor: colors.gray, width: '100%' }}></View>
+                                                    <TouchableWithoutFeedback onPress={() => {
+                                                        let events = this.state.events;
+                                                        events[item.id - 1].img = true;
+                                                        this.setState({ events })
+                                                    }}>
+                                                        <View style={{ position: 'absolute', zIndex: 1, marginLeft: '83%', marginTop: 50, backgroundColor: 'white', alignItems: 'flex-end', opacity: 0.7 }}>
+                                                            {!item.img && <Icon type='FontAwesome' name='heart' color={colors.black} size={25} />}
+                                                            {item.img && <Icon type='FontAwesome' name='heart' color={colors.red} size={25} />}
+                                                        </View>
+                                                    </TouchableWithoutFeedback>
                                                     <Image
                                                         style={{ width: '100%', height: 180 }}
                                                         source={{ uri: item.image }}
@@ -136,17 +146,39 @@ class Home extends Component {
                                                     </View>
                                                     <View style={{ height: 1, backgroundColor: colors.gray, width: '100%' }}></View>
                                                     <View style={{ height: 40, flex: 1, flexDirection: 'row' }}>
-                                                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                                            <Icon type='EvilIcons' name='heart' color={colors.gray} size={35} />
-                                                        </View>
+                                                        <TouchableWithoutFeedback onPress={() => {
+                                                            let events = this.state.events;
+                                                            events[item.id - 1].fav = true;
+                                                            this.setState({ events })
+                                                        }}>
+                                                            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                                                                {!item.fav && <Icon type='EvilIcons' name='heart' color={colors.gray} size={35} />}
+                                                                {item.fav && <Icon type='EvilIcons' name='heart' color={colors.red} size={35} />
+                                                                }
+                                                            </View>
+                                                        </TouchableWithoutFeedback>
                                                         <View style={{ height: 40, backgroundColor: colors.gray, width: 1 }}></View>
-                                                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                                            <Icon type='EvilIcons' name='comment' color={colors.gray} size={35} />
-                                                        </View>
+                                                        <TouchableWithoutFeedback onPress={() => {
+                                                            let events = this.state.events;
+                                                            events[item.id - 1].cmnt = true;
+                                                            this.setState({ events })
+                                                        }}>
+                                                            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                                                                {!item.cmnt && <Icon type='EvilIcons' name='comment' color={colors.gray} size={35} />}
+                                                                {item.cmnt && <Icon type='EvilIcons' name='comment' color={colors.red} size={35} />}
+                                                            </View>
+                                                        </TouchableWithoutFeedback>
                                                         <View style={{ height: 40, backgroundColor: colors.gray, width: 1 }}></View>
-                                                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                                            <Icon type='EvilIcons' name='share-google' color={colors.gray} size={35} />
-                                                        </View>
+                                                        <TouchableWithoutFeedback onPress={() => {
+                                                            let events = this.state.events;
+                                                            events[item.id - 1].shr = true;
+                                                            this.setState({ events })
+                                                        }}>
+                                                            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                                                                {!item.shr && <Icon type='EvilIcons' name='share-google' color={colors.gray} size={35} />}
+                                                                {item.shr && <Icon type='EvilIcons' name='share-google' color={colors.red} size={35} />}
+                                                            </View>
+                                                        </TouchableWithoutFeedback>
                                                     </View>
                                                 </View>
                                             </View>
@@ -197,7 +229,8 @@ class Banner extends Component {
         this.state = {
             loading: true,
             banners: null,
-            bannerBand: 1
+            bannerBand: 1,
+            show: false,
         }
     }
 
@@ -232,7 +265,7 @@ class Banner extends Component {
                             const { banner, title, id } = item;
                             return (
                                 <View style={{ margin: 10, marginBottom: 0 }} key={index} >
-                                    <TouchableWithoutFeedback onPress={() => this.setState({ bannerBand: id })}>
+                                    <TouchableWithoutFeedback onPress={() => this.setState({ bannerBand: id, show: true })}>
                                         <View style={{ alignItems: 'center' }}>
                                             <Image
                                                 style={{ width: 50, height: 50, borderRadius: 25, borderColor: colors.red, borderWidth: 1 }}
@@ -251,6 +284,22 @@ class Banner extends Component {
 
 
                     </ScrollView>
+                    {this.state.show && <View>
+                        <Image
+                            style={{ width: '100%', height: 180 }}
+                            source={{ uri: banners[bannerBand - 1].banner }}
+                            resizeMode='contain'
+                        />
+
+                        <TouchableWithoutFeedback onPress={() => this.setState({ show: false })}>
+
+                            <View style={{ position: 'absolute', zIndex: +1, marginTop: 10, marginLeft: 10, backgroundColor: 'white', alignItems: 'flex-end', opacity: 0.8 }}>
+
+                                <Icon type='EvilIcons' name='close' color={colors.red} size={35} />
+
+                            </View>
+                        </TouchableWithoutFeedback>
+                    </View>}
                 </View>
         )
     }
