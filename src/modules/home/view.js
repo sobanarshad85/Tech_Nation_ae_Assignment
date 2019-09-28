@@ -1,13 +1,15 @@
 //import liraries
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import Icon from '../../components/icons';
 
 // create a component
 class Home extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>Home</Text>
+                <Text>Hosmse</Text>
+                <Icon type='AntDesign' name='home' color={'white'} size={20} />
             </View>
         );
     }
