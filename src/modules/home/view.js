@@ -63,11 +63,18 @@ class Home extends Component {
                         </View>
                         :
                         <View style={{}}>
-                            <TextInput
-                                placeholder='What is in your mood?'
-                                style={{ minHeight: 50, borderColor: colors.gray, borderWidth: 1 }}
-                            />
-
+                            <View style={{ flexDirection: 'row' }}>
+                                <TextInput
+                                    placeholderTextColor='black'
+                                    placeholder='   What is in your mood?'
+                                    style={{ minHeight: 50, borderColor: colors.gray, borderWidth: 1, borderTopWidth: 0, borderRightWidth: 0, width: '90%' }}
+                                />
+                                <TouchableWithoutFeedback onPress={() => console.warn('Request to backend for search')}>
+                                    <View style={{ justifyContent: 'center', alignItems: 'center', paddingLeft: 5, paddingRight: 5, borderBottomWidth: 1, borderColor: colors.gray }}>
+                                        <Icon type='Feather' name='search' color={colors.gray} size={30} />
+                                    </View>
+                                </TouchableWithoutFeedback>
+                            </View>
                             <Banner />
 
                             <View style={{ backgroundColor: colors.ThemeGray, paddingBottom: 430 }}>
